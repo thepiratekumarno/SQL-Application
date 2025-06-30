@@ -44,4 +44,11 @@ venv\Scripts\activate         # Windows
 
 # Install dependencies
 pip install -r requirements.txt
----
+
+# Initialize Sample Data
+python init_db.py
+
+#Run the Application
+streamlit run app.py
+
+
