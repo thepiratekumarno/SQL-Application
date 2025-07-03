@@ -1,5 +1,7 @@
 # 🤖 AI-Powered MongoDB Assistant
 
+[![f](https://media.giphy.com/media/v1.Y2lkPTgyYTE0OTNiajlyNjNwanRyYmdrdzFhbmYwaW5lbHd5YWV2azZxYTVya3pzZmdnayZlcD12MV9naWZzX3RyZW5kaW5nJmN0PWc/0GtVKtagi2GvWuY3vm/giphy.gif)
+
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io)
 [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com)
 [![Google Gemini](https://img.shields.io/badge/Google%2520Gemini-4285F4?logo=google&logoColor=white)](https://deepmind.google/technologies/gemini/)
