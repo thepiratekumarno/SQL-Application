@@ -72,6 +72,28 @@ st.markdown("""
     .stAlert {
         border-radius: 8px;
     }
+    
+    /* Chatbot container */
+    #pocketflow-chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    
+    #pocketflow-chatbot-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -421,6 +443,35 @@ def save_query_to_history(query, result):
     except Exception as e:
         st.error(f"History save error: {str(e)}")
 
+# --- Chatbot Embed Function ---
+def embed_chatbot():
+    """Embed PocketFlow Chatbot in the application"""
+    chatbot_html = """
+    <!-- PocketFlow Chatbot - Start -->
+    <div id="pocketflow-chatbot-container">
+        <div id="pocketflow-chatbot-icon">🤖</div>
+    </div>
+    <script>
+    (function() {
+        var script = document.createElement("script");
+        script.src = "https://askthispage.com/embed/chatbot.js";
+        script.onload = function() {
+            initializeChatbot({
+                extra_urls: [],
+                prefixes: [],
+                chatbotName: 'Database Assistant',
+                wsUrl: 'wss://askthispage.com/api/ws/chat',
+                instruction: 'You are an expert MongoDB assistant. Help users with database queries and operations.',
+                isOpen: false
+            });
+        };
+        document.head.appendChild(script);
+    })();
+    </script>
+    <!-- PocketFlow Chatbot - End -->
+    """
+    st.components.v1.html(chatbot_html, height=0)
+
 # --- Main Application ---
 def main():
     # Header with gradient
@@ -468,6 +519,18 @@ def main():
         **Delete Docs:** "Remove students enrolled before 2020"  
         **Aggregate:** "Show average salary by major"
         """)
+        
+        # Chatbot info in sidebar
+        with st.expander("💬 AI Chatbot Help", expanded=False):
+            st.write("""
+            **The AI chatbot is available in the bottom-right corner!**  
+            Click the 🤖 icon to get help with:
+            - Database queries
+            - MongoDB syntax
+            - Query optimization
+            - Data visualization tips
+            """)
+            st.info("The chatbot understands your database schema and can answer questions about your data!")
 
     # Command input area
     st.subheader("💬 Enter Your Command")
@@ -609,6 +672,9 @@ def main():
                     "result_type": type(execution_result).__name__,
                     "result_size": len(execution_result) if isinstance(execution_result, list) else 1
                 })
+    
+    # Embed the chatbot at the end of the main content
+    embed_chatbot()
 
 if __name__ == "__main__":
-    main()  
+    main()
